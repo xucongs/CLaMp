@@ -1,0 +1,31 @@
+category,query,query_hit_rate_pct,rank,formula,jid,bandgap,fe,ehull,similarity,hit
+composition_constraint,a bismuth-containing semiconductor with narrow bandgap,80.0,1,Bi5Br,JVASP-123787,0.0030801892280578613,-0.1126524806022644,0.8779826164245605,0.6788525581359863,True
+composition_constraint,a bismuth-containing semiconductor with narrow bandgap,80.0,2,ZnBi,JVASP-79520,0.07249879837036133,0.16470134258270264,0.2639753818511963,0.6706757545471191,True
+composition_constraint,a bismuth-containing semiconductor with narrow bandgap,80.0,3,Co2PbN2,JVASP-103144,-0.003435790538787842,0.14592134952545166,3.4271349906921387,0.6664614081382751,False
+composition_constraint,a bismuth-containing semiconductor with narrow bandgap,80.0,4,Ag2Bi2SeS3,JVASP-109799,0.0815345048904419,-0.24069148302078247,0.9594938158988953,0.6531983613967896,True
+composition_constraint,a bismuth-containing semiconductor with narrow bandgap,80.0,5,MgBi,JVASP-78316,-0.004258394241333008,-0.11482733488082886,0.39778685569763184,0.6325184106826782,True
+application_oriented,a high-permittivity dielectric for next-generation capacitors,100.0,1,Pd4Se,JVASP-21512,-0.019482970237731934,-0.1130446195602417,1.9661277532577515,0.6438158750534058,True
+application_oriented,a high-permittivity dielectric for next-generation capacitors,100.0,2,Te2MoW2Se4,JVASP-28489,0.6644510626792908,-0.4119466245174408,3.706540107727051,0.6352691054344177,True
+application_oriented,a high-permittivity dielectric for next-generation capacitors,100.0,3,Ta2PdSe6,JVASP-14409,0.22522851824760437,-0.7291556596755981,3.021803379058838,0.6105732917785645,True
+application_oriented,a high-permittivity dielectric for next-generation capacitors,100.0,4,NaSe3,JVASP-118800,0.7675313353538513,-0.44639813899993896,1.0138622522354126,0.5932528972625732,True
+application_oriented,a high-permittivity dielectric for next-generation capacitors,100.0,5,U2TeSe,JVASP-100329,-0.0036904215812683105,-0.9309384822845459,3.210343837738037,0.5747165679931641,True
+complex_constraint,a magnetic semiconductor with moderate bandgap suitable for spin filtering,100.0,1,Nb3SBr7,JVASP-13942,0.9547752737998962,-1.025362253189087,2.13090443611145,0.6709818243980408,True
+complex_constraint,a magnetic semiconductor with moderate bandgap suitable for spin filtering,100.0,2,HfNCl2,JVASP-115861,1.6587727069854736,-1.387538194656372,2.050473213195801,0.6317089200019836,True
+complex_constraint,a magnetic semiconductor with moderate bandgap suitable for spin filtering,100.0,3,Mo2H2O7,JVASP-29862,2.2091007232666016,-1.8021653890609741,3.339817523956299,0.6190016269683838,True
+complex_constraint,a magnetic semiconductor with moderate bandgap suitable for spin filtering,100.0,4,SmCuSeF,JVASP-5122,1.286224365234375,-2.1085495948791504,0.01724410057067871,0.6134068369865417,True
+complex_constraint,a magnetic semiconductor with moderate bandgap suitable for spin filtering,100.0,5,TbMoO4F,JVASP-56686,3.7875068187713623,-3.058013916015625,2.303622245788574,0.6002784967422485,True
+negative_query,"a non-magnetic, highly compressible material with low density",100.0,1,H4BrN,JVASP-120020,4.338351726531982,-0.5250322818756104,2.739863634109497,0.7135065793991089,True
+negative_query,"a non-magnetic, highly compressible material with low density",100.0,2,HBrO,JVASP-120025,1.7347493171691895,-0.3012688159942627,1.3760404586791992,0.650661826133728,True
+negative_query,"a non-magnetic, highly compressible material with low density",100.0,3,H4NClO2,JVASP-33318,3.2125144004821777,-0.5520826578140259,2.797027826309204,0.6080031991004944,True
+negative_query,"a non-magnetic, highly compressible material with low density",100.0,4,H6CIN,JVASP-36870,4.107484340667725,-0.23120158910751343,3.3369388580322266,0.5973455905914307,True
+negative_query,"a non-magnetic, highly compressible material with low density",100.0,5,HOF,JVASP-121001,1.2542740106582642,0.5629774332046509,1.5276994705200195,0.596129298210144,True
+structural_query,a cubic perovskite with insulating ground state,100.0,1,U3TiSb5,JVASP-23549,0.01429283618927002,-0.33002686500549316,3.789747953414917,0.6774894595146179,True
+structural_query,a cubic perovskite with insulating ground state,100.0,2,UTeAs,JVASP-86478,-0.0010033845901489258,-0.7575221061706543,2.5724823474884033,0.6323158144950867,True
+structural_query,a cubic perovskite with insulating ground state,100.0,3,ZrU3Sb5,JVASP-21834,-0.0009160637855529785,-0.31295692920684814,4.078199863433838,0.6197271943092346,True
+structural_query,a cubic perovskite with insulating ground state,100.0,4,CuSeI,JVASP-115971,-0.007742583751678467,0.6130954027175903,0.31513261795043945,0.614030122756958,True
+structural_query,a cubic perovskite with insulating ground state,100.0,5,YWF5,JVASP-30669,0.032589733600616455,-2.5305614471435547,1.3587572574615479,0.6121125221252441,True
+2d_focused,a 2D semiconductor with direct bandgap suitable for optoelectronic devices,100.0,1,HfSnS3,JVASP-45331,1.0971238613128662,-1.2852119207382202,2.107884645462036,0.64165860414505,True
+2d_focused,a 2D semiconductor with direct bandgap suitable for optoelectronic devices,100.0,2,HfNCl2,JVASP-115861,1.6587727069854736,-1.387538194656372,2.050473213195801,0.6349449753761292,True
+2d_focused,a 2D semiconductor with direct bandgap suitable for optoelectronic devices,100.0,3,PbI2,JVASP-29322,2.2811362743377686,-0.6485297679901123,-0.00017189979553222656,0.6231026649475098,True
+2d_focused,a 2D semiconductor with direct bandgap suitable for optoelectronic devices,100.0,4,SiC,JVASP-8118,2.1855897903442383,-0.22504812479019165,2.9129199981689453,0.6053646206855774,True
+2d_focused,a 2D semiconductor with direct bandgap suitable for optoelectronic devices,100.0,5,PbClF,JVASP-106476,3.5166432857513428,-1.8177181482315063,0.012280821800231934,0.5884465575218201,True

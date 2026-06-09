@@ -1,0 +1,17 @@
+folder,file,layer1,layer1_CBM_eV,layer1_VBM_eV,layer2,layer2_CBM_eV,layer2_VBM_eV,band_alignment_type,electron_transport_layer,hole_transport_layer,CBO_eV,VBO_eV,PCE(SLME),PCE£¨Scharber£©
+hetero_BiI3-CdI2,D:\work\LLM-MAT\fig\dft\hetero_BiI3-CdI2\band_alignment_layer.txt,BiI$_3$ layer,2.071,-0.408,CdI$_2$ layer,2.149,-0.226,Type II (Staggered),BiI$_3$ layer,CdI$_2$ layer,0.077,0.182,21.53%,14.07%
+hetero_BiI3-SiH,D:\work\LLM-MAT\fig\dft\hetero_BiI3-SiH\band_alignment_layer.txt,BiI$_3$ layer,0.833,-1.67,SiH layer,1.999,-0.215,Type II (Staggered),BiI$_3$ layer,SiH layer,1.166,1.455,12.69%,6.62%
+hetero_BiSI-CdI2,D:\work\LLM-MAT\fig\dft\hetero_BiSI-CdI2\band_alignment_layer.txt,BiSI layer,2.035,-0.222,CdI$_2$ layer,0.964,-0.637,Type II (Staggered),CdI$_2$ layer,BiSI layer,1.07,0.415,20.18%,19.62%
+hetero_BiSI-HfS2,D:\work\LLM-MAT\fig\dft\hetero_BiSI-HfS2\band_alignment_layer.txt,BiSI$_3$ layer,2.402,-0.223,HfS2 layer,0.43,-1.277,Type II (Staggered),CdI$_2$ layer,BiI$_3$ layer,1.972,1.053,14.49%,5.89%
+hetero_BiSI-HfS3,D:\work\LLM-MAT\fig\dft\hetero_BiSI-HfS3\band_alignment_layer.txt,BiSI layer,2.431,-0.217,HfS3 layer,0.689,-0.476,Type II (Staggered),HfS3 layer,BiSI layer,1.742,0.258,17.10%,20.94%
+hetero_BiSI-SnS,D:\work\LLM-MAT\fig\dft\hetero_BiSI-SnS\band_alignment_layer.txt,BiSI layer,0.591,-1.403,SnS layer,1.522,-0.209,Type III (Broken Gap),BiSI layer,SnS layer,0.931,1.194,,
+hetero_CdI2-CdSbS2Cl,D:\work\LLM-MAT\fig\dft\hetero_CdI2-CdSbS2Cl\band_alignment_layer.txt,CdI$_2$ layer,1.478,-1.187,CdSbS$_2$Cl layer,1.065,-0.207,Type I (Straddling),CdSbS$_2$Cl layer,CdSbS$_2$Cl layer,0.413,0.98,,
+hetero_CdI2-HfS2,D:\work\LLM-MAT\fig\dft\hetero_CdI2-HfS2\band_alignment_layer.txt,CdI2 layer,2.359,-0.408,HfS2 layer,0.927,-0.217,Type I (Straddling),CdI$_2$ layer,CdI$_2$ layer,1.432,0.191,,
+hetero_CdI2-Sb2S3,D:\work\LLM-MAT\fig\dft\hetero_CdI2-Sb2S3\band_alignment_layer.txt,CdI2layer,1.204,-1.313,Sb2S3 layer,1.014,-0.212,Type III (Broken Gap),CdI$_2$ layer,CdI$_2$ layer,0.19,1.101,,
+hetero_CdI2-SiH,D:\work\LLM-MAT\fig\dft\hetero_CdI2-SiH\band_alignment_layer.txt,CdI2 layer,0.824,-1.64,SiH layer,1.789,-0.219,Type II (Staggered),CdI2 layer,SiH layer,0.965,1.421,20.00%,9.12%
+hetero_CdSbS2Cl-SiH,D:\work\LLM-MAT\fig\dft\hetero_CdSbS2Cl-SiH\band_alignment_layer.txt,CdSbS2Cl layer,0.039,-0.285,SiH layer,1.132,-2.054,Type I (Straddling),CdSbS2Cl layer,CdSbS2Cl layer,1.093,1.769,,
+hetero_HfS2-HfS3,D:\work\LLM-MAT\fig\dft\hetero_HfS2-HfS3\band_alignment_layer.txt,HfS2 layer,0.082,-0.082,HfS3 layer,0.597,-0.177,Type I (Straddling),HfS2 layer,HfS2 layer,0.515,0.095,,
+hetero_HfS2-Sb2S3,D:\work\LLM-MAT\fig\dft\hetero_HfS2-Sb2S3\band_alignment_layer.txt,HfS2 layer,0.209,-1.299,Sb2S3layer,1.846,-0.211,Type II (Staggered),HfS2 layer,Sb2S3layer,1.637,1.088,13.02%,1.81%
+hetero_HfS3-Sb2S3,D:\work\LLM-MAT\fig\dft\hetero_HfS3-Sb2S3\band_alignment_layer.txt,HfS3 layer,0.34,-1.057,Sb2S3 layer,1.761,-0.221,Type II (Staggered),HfS3 layer,Sb2S3 layer,1.421,0.836,18.71%,5.99%
+hetero_Sb2S3-SiH,D:\work\LLM-MAT\fig\dft\hetero_Sb2S3-SiH\band_alignment_layer.txt,Sb2S3 layer,0.235,-0.655,SiH layer,1.639,-2.143,Type I (Straddling),Sb2S3 layer,Sb2S3 layer,1.403,1.488,,
+,,,,,,,,,,,,,,
