@@ -1,14 +1,17 @@
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
 from torch_geometric.nn import global_mean_pool
+
 from torch_scatter import scatter
 
 
-
+# ============================================================
+# Basic modules
+# ============================================================
 class RBFExpansion(nn.Module):
+    """Sine RBF + smooth cutoff."""
     def __init__(self, num_rbf=16, cutoff=8.0):
         super().__init__()
         self.cutoff = cutoff
@@ -28,6 +31,7 @@ class RBFExpansion(nn.Module):
 
 
 class EGNNLayer(nn.Module):
+    """PaiNN-style equivariant layer (updates scalars, vectors, and coordinates jointly)."""
     def __init__(self, hidden_dim, num_rbf=16, cutoff=8.0):
         super().__init__()
         self.hidden_dim = hidden_dim
@@ -94,8 +98,11 @@ class EGNNLayer(nn.Module):
         return s_new, v_new, coord_new
 
 
-
+# ============================================================
+# Shared backbone: GraphEncoder
+# ============================================================
 class GraphEncoder(nn.Module):
+    """Stacked EGNN layers + global pooling; outputs a graph-level embedding. Shared by all models."""
     def __init__(self, in_node_dim=10, hidden_dim=256, out_dim=512,
                  n_layers=4, num_rbf=16, cutoff=8.0):
         super().__init__()
@@ -122,6 +129,7 @@ class GraphEncoder(nn.Module):
 
 
 def _build_property_head(embed_dim, dropout=0.3, n_props=3):
+    """Shared regression-head architecture (keeps the graph-only vs. multimodal comparison fair)."""
     return nn.Sequential(
         nn.LayerNorm(embed_dim),
         nn.Linear(embed_dim, embed_dim // 2),
@@ -131,8 +139,11 @@ def _build_property_head(embed_dim, dropout=0.3, n_props=3):
     )
 
 
-
+# ============================================================
+# Graph-only model (baseline)
+# ============================================================
 class GraphOnlyModel(nn.Module):
+    """Pure graph regression baseline. Architecture = shared GraphEncoder + shared PropertyHead."""
     def __init__(self, in_node_dim=10, hidden_dim=256, embed_dim=512,
                  n_layers=4, num_rbf=16, cutoff=8.0,
                  dropout=0.3, n_props=3):
@@ -160,30 +171,44 @@ class GraphOnlyModel(nn.Module):
         return self._encode(bg)
 
 
-
+# ============================================================
+# Multimodal model (main model)
+# ============================================================
 class MultimodalModel(nn.Module):
+    """
+    Multimodal: graph + text + contrastive learning.
+
+    Architecture notes (v3; fixes the gradient-conflict issue present in v1):
+        graph_encoder → graph_emb ──→ property_head → pred_props
+                          │
+                          └─→ graph_projector → contrastive embedding
+        text_emb ──→ text_projector ───────────→ contrastive embedding
+
+    The contrastive loss back-propagates only through the projector and does not
+    contaminate the backbone graph_emb, preserving feature quality for regression.
+    """
     def __init__(self, in_node_dim=10, hidden_dim=256, embed_dim=512,
                  n_layers=4, llm_dim=2048, num_rbf=16, cutoff=8.0,
                  dropout=0.3, n_props=3, use_projection_head=True):
         super().__init__()
         self.use_projection_head = use_projection_head
 
-        
+        # Shared backbone
         self.graph_encoder = GraphEncoder(
             in_node_dim=in_node_dim, hidden_dim=hidden_dim, out_dim=embed_dim,
             n_layers=n_layers, num_rbf=num_rbf, cutoff=cutoff,
         )
-        
+        # Shared property head
         self.property_head = _build_property_head(embed_dim, dropout, n_props)
 
-        
+        # Text projection
         self.text_projector = nn.Sequential(
             nn.Linear(llm_dim, llm_dim),
             nn.GELU(),
             nn.Linear(llm_dim, embed_dim),
         )
 
-        
+        # Graph-side contrastive projection head (key: gradient isolation)
         if use_projection_head:
             self.graph_projector = nn.Sequential(
                 nn.Linear(embed_dim, embed_dim),
@@ -200,6 +225,12 @@ class MultimodalModel(nn.Module):
         )
 
     def forward(self, batch_graph, text_emb):
+        """
+        Returns:
+            graph_emb_norm : [B, embed_dim]  L2-normalized (for contrastive learning)
+            text_emb_norm  : [B, embed_dim]  L2-normalized (for contrastive learning)
+            pred_props     : [B, 3]          property predictions (Z-score space)
+        """
         graph_emb = self._encode(batch_graph)
         pred_props = self.property_head(graph_emb)
 
@@ -212,7 +243,7 @@ class MultimodalModel(nn.Module):
             pred_props,
         )
 
-    
+    # ------ Inference API ------
     def encode_graph(self, batch_graph):
         emb = self._encode(batch_graph)
         return F.normalize(self.graph_projector(emb), p=2, dim=-1)
@@ -224,8 +255,14 @@ class MultimodalModel(nn.Module):
         return self.property_head(self._encode(batch_graph))
 
 
-
+# ============================================================
+# Factory function (convenient construction by name)
+# ============================================================
 def build_model(model_type: str, cfg):
+    """
+    Build a model from a type string.
+    model_type ∈ {"graph_only", "multimodal"}
+    """
     if model_type == "graph_only":
         return GraphOnlyModel(
             in_node_dim=cfg.IN_NODE_DIM, hidden_dim=cfg.HIDDEN_DIM,
