@@ -39,7 +39,7 @@ class EGNNLayer(nn.Module):
         self.rbf = RBFExpansion(num_rbf, cutoff)
 
         self.message_net = nn.Sequential(
-            nn.Linear(2 * hidden_dim + num_rbf, 3 * hidden_dim),
+            nn.Linear(3 * hidden_dim + num_rbf, 3 * hidden_dim),
             nn.SiLU(),
             nn.Linear(3 * hidden_dim, 3 * hidden_dim),
             nn.SiLU(),
@@ -66,17 +66,17 @@ class EGNNLayer(nn.Module):
 
         dist = torch.norm(edge_vec, dim=-1, keepdim=True)
         rbf  = self.rbf(dist)
-        msg_input = torch.cat([s_norm[row], s_norm[col], rbf], dim=-1)
+        e_norm = edge_vec / (dist + 1e-6)
+        v_j = v[col]
+        v_j_proj = (v_j * e_norm.unsqueeze(1)).sum(dim=-1)
+        msg_input = torch.cat([s_norm[row], s_norm[col], rbf, v_j_proj], dim=-1)
         W = self.message_net(msg_input)
         W_s, W_vg, W_vs = torch.split(W, self.hidden_dim, dim=-1)
 
         delta_s_msg = W_s * s_norm[col]
-        e_norm = edge_vec / (dist + 1e-6)
-        v_j = v[col]
-        v_j_proj = (v_j * e_norm.unsqueeze(1)).sum(dim=-1)
         delta_v_msg = (
             W_vg.unsqueeze(-1) * v_j +
-            W_vs.unsqueeze(-1) * v_j_proj.unsqueeze(-1) * e_norm.unsqueeze(1)
+            W_vs.unsqueeze(-1) * e_norm.unsqueeze(1)
         )
         coord_weight = self.coord_net(delta_s_msg)
         delta_coord_msg = edge_vec * coord_weight
@@ -175,18 +175,6 @@ class GraphOnlyModel(nn.Module):
 # Multimodal model (main model)
 # ============================================================
 class MultimodalModel(nn.Module):
-    """
-    Multimodal: graph + text + contrastive learning.
-
-    Architecture notes (v3; fixes the gradient-conflict issue present in v1):
-        graph_encoder → graph_emb ──→ property_head → pred_props
-                          │
-                          └─→ graph_projector → contrastive embedding
-        text_emb ──→ text_projector ───────────→ contrastive embedding
-
-    The contrastive loss back-propagates only through the projector and does not
-    contaminate the backbone graph_emb, preserving feature quality for regression.
-    """
     def __init__(self, in_node_dim=10, hidden_dim=256, embed_dim=512,
                  n_layers=4, llm_dim=2048, num_rbf=16, cutoff=8.0,
                  dropout=0.3, n_props=3, use_projection_head=True):
